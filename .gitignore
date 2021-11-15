@@ -1,4 +1,5 @@
 /node_modules/
+/service-accounts/
 schema.json
 dpduk-d-reportingdata-l1-service-account.json
 dpduk-developer-jack-gray_service-account.json
