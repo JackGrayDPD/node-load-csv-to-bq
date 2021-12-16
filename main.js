@@ -2,8 +2,8 @@ require('dotenv').config();
 const yargs = require('yargs');
 const fs = require('fs');
 
-const {BigQuery} = require('@google-cloud/bigquery');
-const {Storage} = require('@google-cloud/storage');
+const { BigQuery } = require('@google-cloud/bigquery');
+const { Storage } = require('@google-cloud/storage');
 
 const bigquery = new BigQuery();
 const storage = new Storage();
@@ -11,25 +11,25 @@ const storage = new Storage();
 const args = yargs(process.argv.slice(2))
   .options({
     'datasetId': {
-      alias: ['datasetid','d'],
+      alias: ['datasetid', 'd'],
       demandOption: true,
       describe: 'The name of the existing dataset into which to load the data.',
       type: 'string'
     },
     'tableId': {
-      alias: ['tableid','t'],
+      alias: ['tableid', 't'],
       demandOption: true,
       describe: 'The name of the table into which to load the data. It does not have to exist.',
       type: 'string'
     },
     'bucketName': {
-      alias: ['bucketname','b'],
+      alias: ['bucketname', 'b'],
       demandOption: true,
       describe: 'The Cloud Storage URI of the bucket where the data is stored.',
       type: 'string'
     },
     'fileName': {
-      alias: ['filename','fn'],
+      alias: ['filename', 'fn'],
       demandOption: true,
       describe: 'Supports wildcards as per the BigQuery client library docs.',
       type: 'string'
@@ -46,15 +46,15 @@ const args = yargs(process.argv.slice(2))
       demandOption: false,
       describe: 'Optional. Defines the type of partition.',
       type: 'string',
-      choices: ['time','range']
+      choices: ['time', 'range']
     },
     'sourceFormat': {
-      alias: ['sourceformat','sf'],
+      alias: ['sourceformat', 'sf'],
       demandOption: false,
       default: 'CSV',
       describe: 'The filetype of your source data.',
       type: 'string',
-      choices: ['CSV','DATASTORE_BACKUP','NEWLINE_DELIMITED_JSON','AVRO','PARQUET','ORC']
+      choices: ['CSV', 'DATASTORE_BACKUP', 'NEWLINE_DELIMITED_JSON', 'AVRO', 'PARQUET', 'ORC']
     },
     'location': {
       alias: ['l'],
@@ -64,22 +64,22 @@ const args = yargs(process.argv.slice(2))
       type: 'string'
     },
     'writeDisposition': {
-      alias: ['writedisposition','wd'],
+      alias: ['writedisposition', 'wd'],
       demandOption: false,
       default: 'WRITE_APPEND',
       describe: 'Optional. Specifies the action that occurs if the destination table already exists. ',
       type: 'string',
-      choices: ['WRITE_APPEND','WRITE_TRUNCATE','WRITE_EMPTY']
+      choices: ['WRITE_APPEND', 'WRITE_TRUNCATE', 'WRITE_EMPTY']
     },
     'skipLeadingRows': {
-      alias: ['skipleadingrows','skip'],
+      alias: ['skipleadingrows', 'skip'],
       demandOption: false,
       describe: 'Optional. An integer indicating the number of header rows in the source data.',
       type: 'number'
     },
   })
   .parse();
-const {datasetId, tableId, bucketName, fileName, schema, partition, sourceFormat, location, writeDisposition, skipLeadingRows} = args;
+const { datasetId, tableId, bucketName, fileName, schema, partition, sourceFormat, location, writeDisposition, skipLeadingRows } = args;
 
 async function main() {
   if (!datasetId || !tableId || !bucketName || !fileName) {
