@@ -1,4 +1,6 @@
 # node-load-csv-to-bq
+***This repo is deprecated. There is a new version [here](https://github.com/JackGrayDPD/node-load-files-to-bq).***
+
 Simple script for loading csv files from GCS into BigQuery tables.
 
 ## Setup
